@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $select;
+
+sub secFunction {
+	system("clear");
+	print "\n---------------\n";
+	print "SEC SCRIPTV 1.0\n";
+	print "1 - Ifconfig\n";
+	print "2 - Arp Scan\n";
+	print "3 - Nmap\n";
+	print "4 - Whois\n";
+	print "5 - Dig\n";
+	print "0 - Quit\n";
+	print "---------------\n";
+	print "Please select? ";
+	chomp($select=<STDIN>);	
+	print "\n\n$select\n";
+}
+
+secFunction();
+
