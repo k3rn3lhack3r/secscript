@@ -31,6 +31,7 @@ sub secFunction {
 	chomp($select=<STDIN>);	
 
 	if ($select eq "0") {
+		print "So long, and thanks for all the fish.\n";
 		exit();
 	} elsif ($select eq "1") {
 		ifconfig();
