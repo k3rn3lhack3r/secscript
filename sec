@@ -3,11 +3,17 @@ use strict;
 use warnings;
 
 my $select;
+my $enter;
+my $interface;
+my $ipaddress;
+my $url;
+my $domain;
 
+secFunction();
 sub secFunction {
 	system("clear");
 	print "\n---------------\n";
-	print "SEC SCRIPTV 1.0\n";
+	print "SEC SCRIPT V1.0\n";
 	print "1 - Ifconfig\n";
 	print "2 - Arp Scan\n";
 	print "3 - Nmap\n";
@@ -17,8 +23,91 @@ sub secFunction {
 	print "---------------\n";
 	print "Please select? ";
 	chomp($select=<STDIN>);	
-	print "\n\n$select\n";
+
+	if ($select eq "0") {
+		exit();
+	} elsif ($select eq "1") {
+		ifconfig();
+	} elsif ($select eq "2") {
+		arpscan();
+	} elsif ($select eq "3") {
+		nmap();
+	} elsif ($select eq "4") {
+		whois();
+	} elsif ($select eq "5") {
+		dig();
+	} else {
+		secFunction();
+	}
 }
 
-secFunction();
+sub ifconfig {
+	system("ifconfig");
+	print "Press enter: ";
+	chomp($enter=<STDIN>);
+	secFunction();
+}
 
+sub arpscan {
+	print "Interface? ";
+	chomp($interface=<STDIN>);
+	if($interface) {
+		system("arp-scan --interface=$interface --localnet ");
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	} else {
+		print "No interface entered.\n";
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	}
+}
+
+sub nmap {
+	print "IP address? ";
+	chomp($ipaddress=<STDIN>);
+	if($ipaddress) {
+		system("nmap $ipaddress");
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	} else {
+		print "No IP address entered.\n";
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	}
+}
+
+sub whois {
+	print "URL? ";
+	chomp($url=<STDIN>);
+	if($url) {
+		system("whois $url");
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	} else {
+		print "No URL entered.\n";
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	}
+}
+
+sub dig {
+	print "Domain name? ";
+	chomp($domain=<STDIN>);
+	if($domain) {
+		system("dig $domain");
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	} else {
+		print "No Domain name enterd.\n";
+		print "Press enter: ";
+		chomp($enter=<STDIN>);
+		secFunction();
+	}
+}
